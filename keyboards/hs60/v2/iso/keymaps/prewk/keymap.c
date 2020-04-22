@@ -67,21 +67,37 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    uint8_t data[2];
-    data[0] = id_effect;
+    uint8_t color_data[2];
+    uint8_t color_data_hs[2];
+    uint8_t effect_data[2];
 
     switch (get_highest_layer(state)) {
         case _SYMB:
-            data[1] = 1;
+            color_data_hs[0] = 0;
+            color_data_hs[1] = 255;
+            color_data[0] = id_color_1;
+            color_data[1] = *color_data_hs;
+            effect_data[0] = id_effect;
+            effect_data[1] = 5;
+            backlight_config_set_value(effect_data);
+            backlight_config_set_value(color_data);
             break;
         case _NAV:
-            data[1] = 2;
+            color_data_hs[0] = 127;
+            color_data_hs[1] = 255;
+            color_data[0] = id_color_1;
+            color_data[1] = *color_data_hs;
+            effect_data[0] = id_effect;
+            effect_data[1] = 1;
+            backlight_config_set_value(effect_data);
+            backlight_config_set_value(color_data);
             break;
         default:
-            data[1] = 3;
+            effect_data[0] = id_effect;
+            effect_data[1] = 6;
+            backlight_config_set_value(effect_data);
             break;
     }
-    backlight_config_set_value(data);
 
     return state;
 }
