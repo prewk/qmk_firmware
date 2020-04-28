@@ -43,14 +43,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS,  KC_TRNS,  KC_UP,    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  A(S(KC_8)),  A(S(KC_9))    ,\
     KC_TRNS,  KC_LEFT,  KC_DOWN,  KC_RGHT,  S1_DEC,   S1_INC,   S2_DEC,   S2_INC,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,\
     KC_TRNS,  KC_TRNS,  EF_DEC,   EF_INC,   H1_DEC,   H1_INC,   H2_DEC,   H2_INC,   BR_DEC,   BR_INC,   ES_DEC,   ES_INC,             KC_TRNS,\
-    KC_VOLU,  KC_VOLD,  KC_MUTE,                                KC_TRNS,                                KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
+    KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,                                KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
 
 [_NAV] = LAYOUT_60_iso( /* Nav layer */
-    KC_TRNS,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,      KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,      KC_F11,   KC_F12,   KC_DEL ,\
+   G(KC_NUBS),KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,      KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,      KC_F11,   KC_F12,   KC_DEL ,\
     KC_TRNS,  KC_TRNS,  KC_MS_U,  KC_TRNS,  KC_WH_D,  KC_TRNS,    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,     KC_TRNS,  KC_TRNS,          \
     KC_BTN1,  KC_MS_L,  KC_MS_D,  KC_MS_R,  KC_WH_U,  A(KC_LEFT), KC_LEFT,  KC_UP,    KC_DOWN,  KC_RIGHT, A(KC_RIGHT), KC_TRNS,  KC_TRNS,  KC_TRNS,\
-    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,     KC_TRNS,            KC_TRNS,\
-    KC_TRNS,  KC_TRNS,  KC_TRNS,                                  KC_BTN2,                      KC_TRNS,  KC_TRNS,     KC_TRNS,  KC_TRNS),
+    KC_BTN2,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,     KC_TRNS,            KC_TRNS,\
+    KC_TRNS,  KC_TRNS,  KC_TRNS,                                  KC_TRNS,                      KC_TRNS,  KC_TRNS,     KC_TRNS,  KC_TRNS),
 };
 
 void matrix_init_user(void) {
