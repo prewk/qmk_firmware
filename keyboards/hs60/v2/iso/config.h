@@ -145,5 +145,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // VIA lighting is handled by the keyboard-level code
 #define VIA_CUSTOM_LIGHTING_ENABLE
 
-#define LSPO_KEY KC_8
-#define RSPC_KEY KC_9
+// Space cadet shift ()
+#define LSPO_KEYS KC_LSFT, LSPO_MOD, KC_8
+#define RSPC_KEYS KC_RSFT, RSPC_MOD, KC_9
+
+// Space cadet alt []
+#define LAPO_KEYS KC_LALT, KC_LALT, KC_8
+#define RAPC_KEYS KC_RALT, KC_RALT, KC_9
