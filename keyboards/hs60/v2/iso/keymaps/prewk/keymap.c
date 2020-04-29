@@ -36,7 +36,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,   KC_Q,     KC_W,     KC_E,  KC_R,  KC_T,  KC_Y,    KC_U,  KC_I,  KC_O,     KC_P,     KC_LBRC,  KC_RBRC,         \
     KC_GESC,  KC_A,     KC_S,     KC_D,  KC_F,  KC_G,  KC_H,    KC_J,  KC_K,  KC_L,     KC_SCLN,  KC_QUOT,  KC_NUHS, KC_ENT, \
     KC_LSPO,  KC_GRV,   KC_Z,     KC_X,  KC_C,  KC_V,  KC_B,    KC_N,  KC_M,  KC_COMM,  KC_DOT,   KC_SLSH,           KC_RSPC,\
-    KC_LCTL,  KC_LAPO,   KC_LCMD,                      LT(_NAV, KC_SPC),                MO(_SYMB),KC_RAPC,  KC_APP,  KC_RCTL),
+    KC_LCTL,  KC_LAPO,   KC_LCMD,                      LT(_NAV, KC_SPC),                MO(_SYMB),KC_RAPC,  TG(_NAV),KC_RCTL),
 
 [_SYMB] = LAYOUT_60_iso( /* Symbol layer */
     KC_NUBS,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_DEL ,\
@@ -113,6 +113,7 @@ void qdance_finished (qk_tap_dance_state_t *state, void *user_data) {
     } else if (state->count == 3) {
         register_code(KC_RSFT);
         register_code(KC_EQL);
+        register_code(KC_SPC);
     }
 }
 
@@ -125,6 +126,7 @@ void qdance_reset (qk_tap_dance_state_t *state, void *user_data) {
     } else if (state->count == 3) {
         unregister_code(KC_RSFT);
         unregister_code(KC_EQL);
+        unregister_code(KC_SPC);
     }
 }
 
