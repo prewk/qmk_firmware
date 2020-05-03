@@ -42,7 +42,7 @@ LT(_NUM, KC_TAB),KC_Q,  KC_W,     KC_E,  KC_R,  KC_T,  KC_Y,    KC_U,  KC_I,  KC
 [_SYMB] = LAYOUT_60_iso( /* Symbol layer */
     KC_NUBS,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_DEL ,\
     KC_TRNS,  KC_TRNS,  KC_UP,    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  A(S(KC_8)),  A(S(KC_9))    ,\
-    KC_TRNS,  KC_LEFT,  KC_DOWN,  KC_RGHT,  S1_DEC,   S1_INC,   S2_DEC,   S2_INC,   KC_TRNS,  KC_TRNS,  A(KC_2),  A(KC_8),  A(KC_9),  KC_TRNS,\
+    KC_TRNS,  KC_LEFT,  KC_DOWN,  KC_RGHT,  S1_DEC,   S1_INC,   S2_DEC,   S2_INC,   KC_TRNS,  A(KC_4),  A(KC_2),  A(KC_8),  A(KC_9),  KC_TRNS,\
     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  S(KC_7),  A(KC_7),  S(A(KC_7)),         KC_TRNS,\
     KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,                                KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
 
