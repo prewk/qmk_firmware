@@ -53,12 +53,11 @@ LT(_NUM, KC_TAB),KC_Q,  KC_W,     KC_E,  KC_R,  KC_T,  KC_Y,    KC_U,  KC_I,  KC
     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_TRNS,  KC_PGDOWN,KC_TRNS,  KC_TRNS,  KC_TRNS,     KC_TRNS,            KC_TRNS,\
     KC_TRNS,  KC_TRNS,  KC_TRNS,                                  KC_TRNS,                      KC_TRNS,  KC_TRNS,     KC_TRNS,  KC_TRNS),
 
-
 [_NUM] = LAYOUT_60_iso( /* Nav layer */
     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_TRNS,  KC_PEQL,  KC_PSLS,KC_PAST,  KC_TRNS,     KC_TRNS,  KC_TRNS,  KC_TRNS ,\
     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_P7,    KC_P8,    KC_P9,  KC_PMNS,  KC_TRNS,     KC_TRNS,  KC_TRNS,          \
     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_P4,    KC_P5,    KC_P6,  KC_PPLS,  KC_TRNS,     KC_TRNS,  KC_TRNS,  KC_TRNS,\
-    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_P1,    KC_P2,    KC_P3,  KC_TRNS,  KC_TRNS,     KC_TRNS,            KC_TRNS,\
+    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_TRNS,  KC_P1,    KC_P2,  KC_P3,  KC_TRNS,     KC_TRNS,            KC_TRNS,\
     KC_TRNS,  KC_TRNS,  KC_TRNS,                                  KC_P0,                      KC_PCMM,  KC_TRNS,     KC_TRNS,  KC_TRNS),
 };
 
