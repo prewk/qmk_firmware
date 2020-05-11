@@ -24,6 +24,11 @@
 #define _NAV 2
 #define _NUM 3
 
+enum my_keycodes {
+    KC_3BT = SAFE_RANGE,
+    KC_BOX
+};
+
 enum td_keycodes {
     Q_DANCE
 };
@@ -54,13 +59,12 @@ LT(_NUM, KC_TAB),KC_Q,  KC_W,     KC_E,  KC_R,  KC_T,  KC_Y,    KC_U,  KC_I,  KC
     KC_TRNS,  KC_TRNS,  KC_TRNS,                                  KC_TRNS,                      KC_TRNS,  KC_TRNS,     KC_TRNS,  KC_TRNS),
 
 [_NUM] = LAYOUT_60_iso( /* Nav layer */
-    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_TRNS,  KC_PEQL,  KC_PSLS,KC_PAST,  KC_TRNS,     KC_VOLD,  KC_VOLU,  KC_MUTE ,\
+    KC_3BT,   KC_BOX,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_TRNS,  KC_PEQL,  KC_PSLS,KC_PAST,  KC_TRNS,     KC_VOLD,  KC_VOLU,  KC_MUTE ,\
     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_P7,    KC_P8,    KC_P9,  KC_PMNS,  KC_TRNS,     KC_TRNS,  KC_TRNS,          \
-    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_P4,    KC_P5,    KC_P6,  KC_PPLS,  KC_TRNS,     KC_TRNS,  KC_TRNS,  KC_TRNS,\
+    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_P4,    KC_P5,    KC_P6,  KC_PPLS,  KC_TRNS,     KC_TRNS,  KC_TRNS,  KC_MPLY,\
     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_TRNS,  KC_P1,    KC_P2,  KC_P3,  KC_TRNS,     KC_TRNS,            KC_TRNS,\
     KC_TRNS,  KC_TRNS,  KC_TRNS,                                  KC_P0,                      KC_PCMM,  KC_TRNS,     KC_TRNS,  KC_TRNS),
 };
-
 
 void matrix_init_user(void) {
     uint8_t data[2];
@@ -74,6 +78,48 @@ void matrix_scan_user(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case KC_3BT:
+            if (record->event.pressed) {
+                // ```
+                register_code(KC_RSFT);
+                register_code(KC_EQL);
+                register_code(KC_SPC);
+                unregister_code(KC_RSFT);
+                unregister_code(KC_EQL);
+                unregister_code(KC_SPC);
+
+                register_code(KC_RSFT);
+                register_code(KC_EQL);
+                register_code(KC_SPC);
+                unregister_code(KC_RSFT);
+                unregister_code(KC_EQL);
+                unregister_code(KC_SPC);
+
+                register_code(KC_RSFT);
+                register_code(KC_EQL);
+                register_code(KC_SPC);
+                unregister_code(KC_RSFT);
+                unregister_code(KC_EQL);
+                unregister_code(KC_SPC);
+            }
+            return false;
+        case KC_BOX:
+            if (record->event.pressed) {
+                register_code(KC_SLSH); // -
+                unregister_code(KC_SLSH);
+                register_code(KC_SPC); // space
+                unregister_code(KC_SPC);
+                register_code(KC_LALT);
+                register_code(KC_8); // [
+                unregister_code(KC_8);
+                register_code(KC_9); // ]
+                unregister_code(KC_9);
+                unregister_code(KC_LALT);
+            }
+            return false;
+    }
+
     return true;
 }
 
