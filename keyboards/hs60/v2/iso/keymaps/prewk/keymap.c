@@ -113,6 +113,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 register_code(KC_LALT);
                 register_code(KC_8); // [
                 unregister_code(KC_8);
+                register_code(KC_LALT);
+                register_code(KC_SPC); // space
+                unregister_code(KC_SPC);
+                register_code(KC_LALT);
                 register_code(KC_9); // ]
                 unregister_code(KC_9);
                 unregister_code(KC_LALT);
