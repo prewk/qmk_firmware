@@ -41,7 +41,7 @@
 #define __OPTLFT RALT_T(KC_LEFT)
 #define ENT_NAV LT(_NAV, KC_ENT)
 #define SPC_NAV LT(_NAV, KC_SPC)
-#define TAB_NUM LT(_NAV, KC_TAB)
+#define TAB_NUM LT(_NUM, KC_TAB)
 
 enum my_keycodes {
     KC_3BT = SAFE_RANGE,
