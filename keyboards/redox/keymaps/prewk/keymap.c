@@ -42,6 +42,7 @@
 #define ENT_NAV LT(_NAV, KC_ENT)
 #define SPC_NAV LT(_NAV, KC_SPC)
 #define TAB_NUM LT(_NUM, KC_TAB)
+#define QUAKE LCMD(KC_NUBS)
 
 enum my_keycodes {
     KC_3BT = SAFE_RANGE,
@@ -54,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
      KC_NUHS ,KC_1    ,KC_2    ,KC_3    ,KC_4    ,KC_5    ,                                            KC_6    ,KC_7    ,KC_8    ,KC_9    ,KC_0    ,__PLUS  ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     TAB_NUM ,KC_Q    ,KC_W    ,KC_E    ,KC_R    ,KC_T    ,XXXXXXX ,                          XXXXXXX ,KC_Y    ,KC_U    ,KC_I    ,KC_O    ,KC_P    ,__AU    ,
+     TAB_NUM ,KC_Q    ,KC_W    ,KC_E    ,KC_R    ,KC_T    ,QUAKE   ,                          QUAKE   ,KC_Y    ,KC_U    ,KC_I    ,KC_O    ,KC_P    ,__AU    ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_ESC  ,KC_A    ,KC_S    ,KC_D    ,KC_F    ,KC_G    ,SYMB_L  ,                          SYMB_L  ,KC_H    ,KC_J    ,KC_K    ,KC_L    ,__OE    ,__AE    ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
