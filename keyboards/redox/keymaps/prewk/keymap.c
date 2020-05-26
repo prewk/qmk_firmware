@@ -1,9 +1,5 @@
 #include QMK_KEYBOARD_H
 
-// Each layer gets a name for readability, which is then used in the keymap matrix below.
-// The underscores don't mean anything - you can have a layer called STUFF or any other name.
-// Layer names don't all need to be of the same length, obviously, and you can also skip them
-// entirely and just use numbers.
 #define _QWERTY 0
 #define _SYMB 1
 #define _NAV 2
@@ -41,27 +37,43 @@
 #define __OPTLFT RALT_T(KC_LEFT)
 #define ENT_NAV LT(_NAV, KC_ENT)
 #define SPC_NAV LT(_NAV, KC_SPC)
+#define ENT_SYM LT(_SYMB, KC_ENT)
 #define TAB_NUM LT(_NUM, KC_TAB)
 #define QUAKE LCMD(KC_NUBS)
 
+#define __CMD LM(_CMD, MOD_LGUI)
+
 enum my_keycodes {
     KC_3BT = SAFE_RANGE,
-    KC_BOX
+    KC_BOX,
+    _LMOD_,
+    _RMOD_,
+    _LTOP_,
+    _RTOP_,
+    _QUOTE
 };
+
+#define WITHOUT_MODS(...) \
+  do { \
+    const uint8_t _real_mods = get_mods(); \
+    clear_mods(); \
+    { __VA_ARGS__ } \
+    set_mods(_real_mods); \
+  } while (0)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_QWERTY] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     KC_NUHS ,KC_1    ,KC_2    ,KC_3    ,KC_4    ,KC_5    ,                                            KC_6    ,KC_7    ,KC_8    ,KC_9    ,KC_0    ,__PLUS  ,
+      _QUOTE ,KC_1    ,KC_2    ,KC_3    ,KC_4    ,KC_5    ,                                            KC_6    ,KC_7    ,KC_8    ,KC_9    ,KC_0    ,__PLUS  ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     TAB_NUM ,KC_Q    ,KC_W    ,KC_E    ,KC_R    ,KC_T    ,QUAKE   ,                          QUAKE   ,KC_Y    ,KC_U    ,KC_I    ,KC_O    ,KC_P    ,__AU    ,
+     TAB_NUM ,KC_Q    ,KC_W    ,KC_E    ,KC_R    ,KC_T    ,_LTOP_  ,                          _RTOP_  ,KC_Y    ,KC_U    ,KC_I    ,KC_O    ,KC_P    ,__AU    ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_ESC  ,KC_A    ,KC_S    ,KC_D    ,KC_F    ,KC_G    ,SYMB_L  ,                          SYMB_L  ,KC_H    ,KC_J    ,KC_K    ,KC_L    ,__OE    ,__AE    ,
+     KC_ESC  ,KC_A    ,KC_S    ,KC_D    ,KC_F    ,KC_G    ,_LMOD_  ,                          _RMOD_  ,KC_H    ,KC_J    ,KC_K    ,KC_L    ,__OE    ,__AE    ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LSFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B    ,XXXXXXX ,XXXXXXX ,        KC_PGDN ,KC_PGUP ,KC_N    ,KC_M    ,KC_COMM ,KC_DOT  ,__MINS  ,KC_RSFT ,
+     KC_LSFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B    ,XXXXXXX ,XXXXXXX ,        XXXXXXX ,XXXXXXX ,KC_N    ,KC_M    ,KC_COMM ,KC_DOT  ,__MINS  ,KC_RSFT ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
-     KC_LCTRL ,XXXXXXX ,XXXXXXX ,KC_LALT ,     KC_LCMD    ,KC_BSPC ,SPC_NAV ,        ENT_NAV , KC_DEL ,    KC_RCMD ,     __OPTLFT,KC_DOWN ,KC_UP   ,KC_RGHT
+     KC_LCTRL ,XXXXXXX ,XXXXXXX ,KC_LALT ,    KC_LCMD     ,SPC_NAV, ENT_SYM ,        ENT_SYM , SPC_NAV,   KC_RCMD  ,     __OPTLFT,KC_DOWN ,KC_UP   ,KC_RGHT
   //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
   ),
 
@@ -81,11 +93,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NAV] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     KC_MUTE ,KC_VOLD ,KC_VOLU ,_______ ,_______ ,_______ ,                                            _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,
+     _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,                                            _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_MPLY ,_______ ,_______ ,_______ ,_______ ,_______ ,KC_WH_D ,                          KC_WH_D ,__ALEFT ,__BOT   ,__TOP   ,__ARIGHT,_______ ,_______ ,
+     _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,KC_WH_D ,                          KC_PGUP ,_______ ,__ALEFT   ,__BOT   ,__TOP,__ARIGHT ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______ ,KC_MS_L ,KC_MS_D ,KC_MS_U ,KC_MS_R ,_______ ,KC_WH_U ,                          KC_WH_U ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RIGHT,_______ ,_______ ,
+     _______ ,KC_MS_L ,KC_MS_D ,KC_MS_U ,KC_MS_R ,_______ ,KC_WH_U ,                          KC_PGDN ,_______ ,KC_LEFT ,KC_DOWN   ,KC_UP,KC_RIGHT ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,        _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
@@ -97,9 +109,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
      XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,                                            XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX ,RESET   ,RGB_M_P ,RGB_TOG ,RGB_MOD ,RGB_HUD ,RGB_HUI ,                          XXXXXXX ,XXXXXXX ,KC_P7   ,KC_P8   ,KC_P9   ,KC_PMNS ,XXXXXXX ,
+     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,                          KC_MUTE ,XXXXXXX ,KC_P7   ,KC_P8   ,KC_P9   ,KC_PMNS ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,                          XXXXXXX ,XXXXXXX ,KC_P4   ,KC_P5   ,KC_P6   ,KC_PPLS ,XXXXXXX ,
+     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,                          KC_MPLY ,XXXXXXX ,KC_P4   ,KC_P5   ,KC_P6   ,KC_PPLS ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,        XXXXXXX ,XXXXXXX ,XXXXXXX ,KC_P1   ,KC_P2   ,KC_P3   ,KC_PENT ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
@@ -145,6 +157,124 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+        case _QUOTE:
+            if (!record->event.pressed) {
+                return false;
+            }
+
+            if (get_mods() & MOD_BIT(KC_LGUI)) {
+                unregister_code(KC_LGUI);
+
+                register_code(KC_RSFT);
+                tap_code(KC_EQL);
+                unregister_code(KC_RSFT);
+                tap_code(KC_SPC);
+
+                register_code(KC_LGUI);
+            } else if (get_mods() & MOD_BIT(KC_RGUI)) {
+                unregister_code(KC_RGUI);
+
+                register_code(KC_RSFT);
+                tap_code(KC_EQL);
+                unregister_code(KC_RSFT);
+                tap_code(KC_SPC);
+
+                register_code(KC_RGUI);
+            } else {
+                WITHOUT_MODS({
+                   tap_code(KC_NUHS);
+                });
+            }
+
+            return false;
+        case _LTOP_:
+            if (!record->event.pressed) {
+                return false;
+            }
+
+            if (get_mods() & MOD_BIT(KC_LGUI)) {
+                unregister_code(KC_LGUI);
+                tap_code(KC_GRV);
+                register_code(KC_LGUI);
+            } else if (get_mods() & MOD_BIT(KC_RGUI)) {
+                unregister_code(KC_RGUI);
+                tap_code(KC_GRV);
+                register_code(KC_RGUI);
+            } else {
+                WITHOUT_MODS({
+                    tap_code16(G(KC_NUBS));
+                });
+            }
+
+            return false;
+        case _RTOP_:
+            if (!record->event.pressed) {
+                return false;
+            }
+
+            if (get_mods() & MOD_BIT(KC_LGUI)) {
+                unregister_code(KC_LGUI);
+                tap_code16(S(KC_GRV));
+                register_code(KC_LGUI);
+            } else if (get_mods() & MOD_BIT(KC_RGUI)) {
+                unregister_code(KC_RGUI);
+                tap_code16(S(KC_GRV));
+                register_code(KC_RGUI);
+            } else {
+                WITHOUT_MODS({
+                    tap_code(KC_BSPC);
+                });
+            }
+
+            return false;
+        case _LMOD_:
+            if (!record->event.pressed) {
+                return false;
+            }
+
+            if (get_mods() & MOD_BIT(KC_LALT)) {
+                tap_code(KC_8);
+            } else if (get_mods() & MOD_BIT(KC_RALT)) {
+                tap_code(KC_8);
+            } else if (get_mods() & MOD_BIT(KC_LGUI)) {
+                unregister_code(KC_LGUI);
+                tap_code16(S(A(KC_8)));
+                register_code(KC_LGUI);
+            } else if (get_mods() & MOD_BIT(KC_RGUI)) {
+                unregister_code(KC_RGUI);
+                tap_code16(S(A(KC_8)));
+                register_code(KC_RGUI);
+            } else {
+                WITHOUT_MODS({
+                    tap_code16(S(KC_8));
+                });
+            }
+
+            return false;
+        case _RMOD_:
+            if (!record->event.pressed) {
+                return false;
+            }
+
+            if (get_mods() & MOD_BIT(KC_LALT)) {
+                tap_code(KC_9);
+            } else if (get_mods() & MOD_BIT(KC_RALT)) {
+                tap_code(KC_9);
+            } else if (get_mods() & MOD_BIT(KC_LGUI)) {
+                unregister_code(KC_LGUI);
+                tap_code16(S(A(KC_9)));
+                register_code(KC_LGUI);
+            } else if (get_mods() & MOD_BIT(KC_RGUI)) {
+                unregister_code(KC_RGUI);
+                tap_code16(S(A(KC_9)));
+                register_code(KC_RGUI);
+            } else {
+                WITHOUT_MODS({
+                     tap_code16(S(KC_9));
+                });
+            }
+
+            return false;
         case KC_3BT:
             if (record->event.pressed) {
                 // ```
