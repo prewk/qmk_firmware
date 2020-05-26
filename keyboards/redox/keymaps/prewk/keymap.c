@@ -50,7 +50,8 @@ enum my_keycodes {
     _RMOD_,
     _LTOP_,
     _RTOP_,
-    _QUOTE
+    _QUOTE,
+    DEL_LINE
 };
 
 #define WITHOUT_MODS(...) \
@@ -81,7 +82,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
      KC_3BT  ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5   ,                                            KC_F6   ,KC_F7   ,KC_F8   ,KC_F9   ,KC_F10  ,KC_F11  ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_BOX  ,_______ ,__AT    ,__BSLA  ,__PIPE  ,__FSLA  ,_______ ,                          _______ ,__DQUO  ,__SQUO  ,__BTIC  ,__STAR  ,_______ ,KC_F12  ,
+     KC_BOX  ,_______ ,__AT    ,__BSLA  ,__PIPE  ,__FSLA  ,_______ ,                          DEL_LINE,__DQUO  ,__SQUO  ,__BTIC  ,__STAR  ,_______ ,KC_F12  ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______ ,_______ ,__LABK  ,__LSBK  ,__RSBK  ,__RABK  ,_______ ,                          _______ ,__LCBK  ,__LPAR  ,__RPAR  ,__RCBK  ,_______ ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
@@ -157,12 +158,20 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+        case DEL_LINE:
+            if (record->event.pressed) {
+                tap_code16(G(KC_BSPC));
+            }
+
+            return false;
         case _QUOTE:
             if (!record->event.pressed) {
                 return false;
             }
 
-            if (get_mods() & MOD_BIT(KC_LGUI)) {
+            if (get_mods() & MOD_BIT(KC_LSFT) || (get_mods() & MOD_BIT(KC_RSFT))) {
+                tap_code(KC_NUHS);
+            } else if (get_mods() & MOD_BIT(KC_LGUI)) {
                 unregister_code(KC_LGUI);
 
                 register_code(KC_RSFT);
