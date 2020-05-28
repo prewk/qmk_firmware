@@ -83,7 +83,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
      KC_3BT  ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5   ,                                            KC_F6   ,KC_F7   ,KC_F8   ,KC_F9   ,KC_F10  ,KC_F11  ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_BOX  ,_______ ,_______ ,_______ ,_______ ,_______ ,KC_DEL  ,                          DEL_LINE,_______ ,_______ ,_______ ,_______ ,_______ ,KC_F12  ,
+     KC_BOX  ,_______ ,_______ ,_______ ,_______ ,_______ ,QUAKE   ,                          DEL_LINE,_______ ,_______ ,_______ ,_______ ,_______ ,KC_F12  ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,                          _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
@@ -211,27 +211,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 tap_code(KC_GRV);
                 register_code(KC_RGUI);
             } else {
-                WITHOUT_MODS({
-                    tap_code16(G(KC_NUBS));
-                });
+                tap_code(KC_DEL);
             }
 
             return false;
         case _RTOP_:
-            if (!record->event.pressed) {
-                return false;
-            }
-
-            if (get_mods() & MOD_BIT(KC_LGUI)) {
+            if (record->event.pressed && get_mods() & MOD_BIT(KC_LGUI)) {
                 unregister_code(KC_LGUI);
                 tap_code16(S(KC_GRV));
                 register_code(KC_LGUI);
-            } else if (get_mods() & MOD_BIT(KC_RGUI)) {
+            } else if (record->event.pressed && get_mods() & MOD_BIT(KC_RGUI)) {
                 unregister_code(KC_RGUI);
                 tap_code16(S(KC_GRV));
                 register_code(KC_RGUI);
+            } else if (record->event.pressed) {
+                register_code(KC_BSPC);
             } else {
-                tap_code(KC_BSPC);
+                unregister_code(KC_BSPC);
             }
 
             return false;
