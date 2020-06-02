@@ -33,6 +33,7 @@
 #define __TOP G(KC_UP) // ^^
 #define __ARIGHT A(KC_RIGHT) // >>
 #define __TILDE A(KC_RBRC) // ~
+#define __EQ S(KC_0) // =
 
 #define SYMB_L MO(_SYMB)
 #define __OPTLFT RALT_T(KC_LEFT)
@@ -52,7 +53,9 @@ enum my_keycodes {
     _LTOP_,
     _RTOP_,
     _QUOTE,
-    DEL_LINE
+    DEL_LINE,
+    KC_IPOL,
+    KC_FATAR
 };
 
 #define WITHOUT_MODS(...) \
@@ -85,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_BOX  ,_______ ,_______ ,_______ ,_______ ,_______ ,QUAKE   ,                          DEL_LINE,_______ ,_______ ,_______ ,_______ ,_______ ,KC_F12  ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,                          _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,
+     KC_IPOL ,_______ ,_______ ,_______ ,_______ ,_______ ,__LCBK  ,                          __RCBK  ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,__DOLL  ,__TILDE ,        __BSLA  ,__BSLA  ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
@@ -95,11 +98,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NAV] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,                                            _______ ,_______ ,_______ ,_______ ,_______ ,KC_EQL ,
+     _______ ,_______ ,_______ ,_______ ,_______ ,KC_WH_U ,                                            _______ ,_______ ,_______ ,_______ ,_______ ,KC_EQL ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,KC_WH_D ,                          KC_PGUP ,XXXXXXX ,__ALEFT   ,__BOT   ,__TOP,__ARIGHT ,KC_RBRC ,
+     _______ ,_______ ,_______ ,_______ ,_______ ,KC_WH_D , QUAKE  ,                          DEL_LINE,XXXXXXX ,__ALEFT   ,__BOT   ,__TOP,__ARIGHT ,KC_RBRC ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX ,KC_MS_L ,KC_MS_D ,KC_MS_U ,KC_MS_R ,XXXXXXX ,KC_WH_U ,                          KC_PGDN ,XXXXXXX ,KC_LEFT ,KC_DOWN   ,KC_UP,KC_RIGHT ,XXXXXXX ,
+     XXXXXXX ,KC_MS_L ,KC_MS_D ,KC_MS_U ,KC_MS_R ,XXXXXXX ,__LSBK  ,                          __RSBK  ,XXXXXXX ,KC_LEFT ,KC_DOWN   ,KC_UP,KC_RIGHT ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,KC_BTN1 ,KC_BTN2 ,        _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
@@ -109,11 +112,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NUM] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,                                            XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,
+     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,KC_MPRV ,KC_MNXT ,                                            XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,KC_FATAR,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,                          KC_MUTE ,XXXXXXX ,KC_P7   ,KC_P8   ,KC_P9   ,KC_PMNS ,XXXXXXX ,
+     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,KC_VOLU ,                          KC_MUTE ,XXXXXXX ,KC_P7   ,KC_P8   ,KC_P9   ,KC_PMNS ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,                          KC_MPLY ,XXXXXXX ,KC_P4   ,KC_P5   ,KC_P6   ,KC_PPLS ,XXXXXXX ,
+     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,KC_VOLD ,                          KC_MPLY ,XXXXXXX ,KC_P4   ,KC_P5   ,KC_P6   ,KC_PPLS ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,        XXXXXXX ,XXXXXXX ,XXXXXXX ,KC_P1   ,KC_P2   ,KC_P3   ,KC_PENT ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
@@ -320,6 +323,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 register_code(KC_9); // ]
                 unregister_code(KC_9);
                 unregister_code(KC_LALT);
+            }
+            return false;
+        case KC_IPOL:
+            if (record->event.pressed) {
+                tap_code16(__DOLL);
+                tap_code16(__LCBK);
+            }
+            return false;
+        case KC_FATAR:
+            if (record->event.pressed) {
+                tap_code16(__EQ);
+                tap_code16(__RABK);
+                tap_code(KC_SPC);
             }
             return false;
     }
