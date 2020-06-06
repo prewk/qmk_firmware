@@ -5,92 +5,84 @@
 #define _NAV 2
 #define _NUM 3
 
-#define __SQUO KC_NUHS // '
-#define __DQUO S(KC_2) // "
-#define __BTIC S(KC_EQL) // `
-#define __STAR S(KC_NUHS) // *
-#define __2DOT KC_RBRC // ¨
-#define __AU   KC_LBRC // Å
-#define __AE   KC_QUOT // Ä
-#define __OE   KC_SCLN // Ö
-#define __LABK KC_GRV  // <
-#define __RABK S(KC_GRV) // >
-#define __LSBK A(KC_8) // [
-#define __RSBK A(KC_9) // ]
-#define __LPAR S(KC_8) // (
-#define __RPAR S(KC_9) // )
-#define __LCBK S(A(KC_8)) // {
-#define __RCBK S(A(KC_9)) // }
-#define __PLUS KC_MINS // +
-#define __MINS KC_SLSH // -
-#define __AT   A(KC_2) // @
-#define __DOLL A(KC_4) // $
-#define __FSLA S(KC_7) // /
-#define __PIPE A(KC_7) // |
-#define __BSLA S(A(KC_7)) // Backslash
-#define __ALEFT A(KC_LEFT) // <<
-#define __BOT G(KC_DOWN) // vv
-#define __TOP G(KC_UP) // ^^
-#define __ARIGHT A(KC_RIGHT) // >>
-#define __TILDE A(KC_RBRC) // ~
-#define __EQ S(KC_0) // =
+#define _SNGLQU KC_NUHS // '
+#define _DOBLQU S(KC_2) // "
+#define _BCKTIC S(KC_EQL) // `
+#define _APOSTR KC_EQL // ´
+#define _MULTIP S(KC_NUHS) // *
+#define _2_DOTS KC_RBRC // ¨
+#define _SV_AU_ KC_LBRC // Å
+#define _SV_AE_ KC_QUOT // Ä
+#define _SV_OE_ KC_SCLN // Ö
+#define _ANGULL KC_GRV  // <
+#define _ANGULR S(KC_GRV) // >
+#define _SQUARL A(KC_8) // [
+#define _SQUARR A(KC_9) // ]
+#define _PARENL S(KC_8) // (
+#define _PARENR S(KC_9) // )
+#define _CURLYL S(A(KC_8)) // {
+#define _CURLYR S(A(KC_9)) // }
+#define _PLUS__ KC_MINS // +
+#define _DASH__ KC_SLSH // -
+#define _ATSIGN   A(KC_2) // @
+#define _DOLLAR A(KC_4) // $
+#define _FSLASH S(KC_7) // /
+#define _PIPE__ A(KC_7) // |
+#define _BSLASH S(A(KC_7)) // Backslash
+#define _WORD_L A(KC_LEFT) // <<
+#define _WORD_R A(KC_RIGHT) // >>
+#define _TILDE_ A(KC_RBRC) // ~
+#define _EQUALS S(KC_0) // =
+#define _QUESTI S(KC_MINS) // ?
+#define _COLON_ S(KC_DOT) // :
+#define _PARAGR KC_NUBS // §
 
-#define SYMB_L MO(_SYMB)
-#define __OPTLFT RALT_T(KC_LEFT)
-#define ENT_NAV LT(_NAV, KC_ENT)
-#define SPC_NAV LT(_NAV, KC_SPC)
-#define ENT_SYM LT(_SYMB, KC_ENT)
-#define TAB_NUM LT(_NUM, KC_TAB)
-#define QUAKE LCMD(KC_NUBS)
+#define _OPTLFT RALT_T(KC_LEFT) // Opt / Left Arrow
+#define _OPTDOT LALT_T(KC_DOT) // Opt / .
+#define _CTRLRT RCTL_T(KC_RIGHT) // Ctrl / Right Arrow
+#define SPC_NAV LT(_NAV, KC_SPC) // Space // NAV layer
+#define ENT_SYM LT(_SYMB, KC_ENT) // Enter / SYM layer
+#define TAB_NUM LT(_NUM, KC_TAB) // Tab / NUM layer
+#define _QUAKE LCMD(KC_NUBS) // Quake terminal
+#define _DELLIN LCMD(KC_BSPC) // Delete line
 
-#define __CMD LM(_CMD, MOD_LGUI)
+#define _CMD__Z G(KC_Z) // CMD + Z
+#define _CMD__X G(KC_X) // CMD + X
+#define _CMD__C G(KC_C) // CMD + C
+#define _CMD__V G(KC_V) // CMD + V
 
 enum my_keycodes {
-    KC_3BT = SAFE_RANGE,
-    KC_BOX,
-    _LMOD_,
-    _RMOD_,
-    _LTOP_,
-    _RTOP_,
-    _QUOTE,
-    DEL_LINE,
-    KC_IPOL,
-    KC_FATAR
+    KC_3BT = SAFE_RANGE, // ```
+    KC_BOX, // - []
+    KC_IPOL, // ${
+    KC_FATAR // =>
 };
-
-#define WITHOUT_MODS(...) \
-  do { \
-    const uint8_t _real_mods = get_mods(); \
-    clear_mods(); \
-    { __VA_ARGS__ } \
-    set_mods(_real_mods); \
-  } while (0)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_QWERTY] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
-      _QUOTE ,KC_1    ,KC_2    ,KC_3    ,KC_4    ,KC_5    ,                                            KC_6    ,KC_7    ,KC_8    ,KC_9    ,KC_0    ,__PLUS  ,
+     _SNGLQU ,KC_1    ,KC_2    ,KC_3    ,KC_4    ,KC_5    ,                                            KC_6    ,KC_7    ,KC_8    ,KC_9    ,KC_0    ,_PLUS__ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     TAB_NUM ,KC_Q    ,KC_W    ,KC_E    ,KC_R    ,KC_T    ,_LTOP_  ,                          _RTOP_  ,KC_Y    ,KC_U    ,KC_I    ,KC_O    ,KC_P    ,__AU    ,
+     TAB_NUM ,KC_Q    ,KC_W    ,KC_E    ,KC_R    ,KC_T    ,_QUAKE  ,                          _QUAKE  ,KC_Y    ,KC_U    ,KC_I    ,KC_O    ,KC_P    ,_SV_AU_ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_ESC  ,KC_A    ,KC_S    ,KC_D    ,KC_F    ,KC_G    ,_LMOD_  ,                          _RMOD_  ,KC_H    ,KC_J    ,KC_K    ,KC_L    ,__OE    ,__AE    ,
+     KC_ESC  ,KC_A    ,KC_S    ,KC_D    ,KC_F    ,KC_G    ,KC_DEL  ,                          KC_BSPC ,KC_H    ,KC_J    ,KC_K    ,KC_L    ,_SV_OE_ ,_SV_AE_ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LSFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B    ,__AT    ,__STAR  ,        __FSLA   ,__PIPE ,KC_N    ,KC_M    ,KC_COMM ,KC_DOT  ,__MINS  ,KC_RSFT ,
+     KC_LSFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B    ,TG(_NAV),TG(_SYMB),      TG(_SYMB),TG(_NAV),KC_N    ,KC_M    ,KC_COMM ,KC_DOT  ,_DASH__ ,KC_RSFT ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
-     KC_LCTRL ,__LABK ,__RABK  ,KC_LALT ,    KC_LCMD     ,SPC_NAV, ENT_SYM ,        ENT_SYM , SPC_NAV,   KC_RCMD  ,     __OPTLFT,KC_DOWN ,KC_UP   ,KC_RGHT
+     KC_LCTRL, _ANGULL, _ANGULR,_OPTDOT ,    KC_LCMD      ,SPC_NAV, ENT_SYM ,        ENT_SYM , SPC_NAV,   KC_RCMD  ,     _OPTLFT ,KC_DOWN ,KC_UP   ,_CTRLRT
   //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
   ),
 
   [_SYMB] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     KC_3BT  ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5   ,                                            KC_F6   ,KC_F7   ,KC_F8   ,KC_F9   ,KC_F10  ,KC_F11  ,
+     _BCKTIC ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5   ,                                            KC_F6   ,KC_F7   ,KC_F8   ,KC_F9   ,KC_F10  ,KC_F11  ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_BOX  ,_______ ,_______ ,_______ ,_______ ,_______ ,QUAKE   ,                          DEL_LINE,_______ ,_______ ,_______ ,_______ ,_______ ,KC_F12  ,
+     _______ ,_PARENL ,_CURLYL ,_SQUARL ,_ANGULL ,_______ ,_______ ,                          _______ ,_______ ,_ANGULR ,_SQUARR ,_CURLYR ,_PARENR ,KC_F12  ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_IPOL ,_______ ,_______ ,_______ ,_______ ,_______ ,__LCBK  ,                          __RCBK  ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,
+     _______ ,_ATSIGN ,_DOLLAR ,_MULTIP ,_TILDE_ ,_COLON_ ,_______ ,                          _DELLIN ,_EQUALS ,_FSLASH ,_PIPE__ ,_BSLASH ,_QUESTI ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,__DOLL  ,__TILDE ,        __BSLA  ,__BSLA  ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,
+     _______ ,_CMD__Z ,_CMD__X ,_CMD__C ,_CMD__V ,_______ ,_______ ,_______ ,        _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
      _______ ,_______ ,_______ ,_______ ,     _______ ,    _______ ,_______ ,        _______ ,_______ ,    _______ ,     _______ ,_______ ,_______ ,_______
   //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
@@ -98,13 +90,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NAV] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     _______ ,_______ ,_______ ,_______ ,_______ ,KC_WH_U ,                                            _______ ,_______ ,_______ ,_______ ,_______ ,KC_EQL ,
+     _PARAGR ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5   ,                                            KC_F6   ,KC_F7   ,KC_F8   ,KC_F9   ,KC_F10  ,_APOSTR  ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______ ,_______ ,_______ ,_______ ,_______ ,KC_WH_D , QUAKE  ,                          DEL_LINE,XXXXXXX ,__ALEFT   ,__BOT   ,__TOP,__ARIGHT ,KC_RBRC ,
+     _______ ,_PARENL ,_CURLYL ,_SQUARL ,_ANGULL ,_______ ,_______ ,                          _______ ,_______ ,_WORD_L ,KC_PGDN ,KC_PGUP ,_WORD_R ,_2_DOTS ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX ,KC_MS_L ,KC_MS_D ,KC_MS_U ,KC_MS_R ,XXXXXXX ,__LSBK  ,                          __RSBK  ,XXXXXXX ,KC_LEFT ,KC_DOWN   ,KC_UP,KC_RIGHT ,XXXXXXX ,
+     _______ ,_ATSIGN ,_DOLLAR ,_MULTIP ,_TILDE_ ,_COLON_ ,_______ ,                          _DELLIN ,_______ ,KC_LEFT ,KC_DOWN   ,KC_UP,KC_RIGHT ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,KC_BTN1 ,KC_BTN2 ,        _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,
+     _______ ,_CMD__Z ,_CMD__X ,_CMD__C ,_CMD__V ,_______ ,_______ ,_______ ,        _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
      _______ ,_______ ,_______ ,_______ ,     _______ ,    _______ ,_______ ,        _______ ,_______ ,    _______ ,     _______ ,_______ ,_______ ,_______
   //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
@@ -112,15 +104,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NUM] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,KC_MPRV ,KC_MNXT ,                                            XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,KC_FATAR,
+     _______ ,_______ ,_______ ,_______ ,KC_MPRV ,KC_MNXT ,                                            _______ ,_______ ,_______ ,_______ ,_______ ,KC_FATAR,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,KC_VOLU ,                          KC_MUTE ,XXXXXXX ,KC_P7   ,KC_P8   ,KC_P9   ,KC_PMNS ,XXXXXXX ,
+     _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,KC_VOLU ,                          KC_MUTE ,_______ ,KC_P7   ,KC_P8   ,KC_P9   ,KC_PMNS ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,KC_VOLD ,                          KC_MPLY ,XXXXXXX ,KC_P4   ,KC_P5   ,KC_P6   ,KC_PPLS ,XXXXXXX ,
+     _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,KC_VOLD ,                          KC_MPLY ,_______ ,KC_P4   ,KC_P5   ,KC_P6   ,KC_PPLS ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,        XXXXXXX ,XXXXXXX ,XXXXXXX ,KC_P1   ,KC_P2   ,KC_P3   ,KC_PENT ,XXXXXXX ,
+     _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,        _______ ,_______ ,_______ ,KC_P1   ,KC_P2   ,KC_P3   ,KC_PENT ,_______ ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
-     _______ ,_______ ,_______ ,_______ ,     _______ ,    _______ ,_______ ,        XXXXXXX ,KC_P0   ,    KC_PCMM ,     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX
+     _______ ,_______ ,_______ ,_______ ,     _______ ,    _______ ,_______ ,        _______ ,_______   ,    KC_P0 ,     _______ ,KC_PCMM ,_______ ,_______
   //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
   )
 };
@@ -157,184 +149,57 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(2, layer_state_cmp(state, 2));
     rgblight_set_layer_state(3, layer_state_cmp(state, 3));
     rgblight_set_layer_state(4, layer_state_cmp(state, 4));
+
+    switch (get_highest_layer(state)) {
+        case _QWERTY:
+            rgblight_disable();
+            break;
+        case _SYMB:
+            rgblight_enable();
+            break;
+        case _NAV:
+            rgblight_enable();
+            break;
+        case _NUM:
+            rgblight_enable();
+            break;
+    }
+
     return state;
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case DEL_LINE:
-            if (record->event.pressed) {
-                tap_code16(G(KC_BSPC));
-            }
-
-            return false;
-        case _QUOTE:
-            if (!record->event.pressed) {
-                return false;
-            }
-
-            if (get_mods() & MOD_BIT(KC_LSFT) || (get_mods() & MOD_BIT(KC_RSFT))) {
-                tap_code(KC_NUHS);
-            } else if (get_mods() & MOD_BIT(KC_LGUI)) {
-                unregister_code(KC_LGUI);
-
-                register_code(KC_RSFT);
-                tap_code(KC_EQL);
-                unregister_code(KC_RSFT);
-                tap_code(KC_SPC);
-
-                register_code(KC_LGUI);
-            } else if (get_mods() & MOD_BIT(KC_RGUI)) {
-                unregister_code(KC_RGUI);
-
-                register_code(KC_RSFT);
-                tap_code(KC_EQL);
-                unregister_code(KC_RSFT);
-                tap_code(KC_SPC);
-
-                register_code(KC_RGUI);
-            } else {
-                WITHOUT_MODS({
-                   tap_code(KC_NUHS);
-                });
-            }
-
-            return false;
-        case _LTOP_:
-            if (!record->event.pressed) {
-                return false;
-            }
-
-            if (get_mods() & MOD_BIT(KC_LGUI)) {
-                unregister_code(KC_LGUI);
-                tap_code(KC_GRV);
-                register_code(KC_LGUI);
-            } else if (get_mods() & MOD_BIT(KC_RGUI)) {
-                unregister_code(KC_RGUI);
-                tap_code(KC_GRV);
-                register_code(KC_RGUI);
-            } else {
-                tap_code(KC_DEL);
-            }
-
-            return false;
-        case _RTOP_:
-            if (record->event.pressed && get_mods() & MOD_BIT(KC_LGUI)) {
-                unregister_code(KC_LGUI);
-                tap_code16(S(KC_GRV));
-                register_code(KC_LGUI);
-            } else if (record->event.pressed && get_mods() & MOD_BIT(KC_RGUI)) {
-                unregister_code(KC_RGUI);
-                tap_code16(S(KC_GRV));
-                register_code(KC_RGUI);
-            } else if (record->event.pressed) {
-                register_code(KC_BSPC);
-            } else {
-                unregister_code(KC_BSPC);
-            }
-
-            return false;
-        case _LMOD_:
-            if (!record->event.pressed) {
-                return false;
-            }
-
-            if (get_mods() & MOD_BIT(KC_LALT)) {
-                tap_code(KC_8);
-            } else if (get_mods() & MOD_BIT(KC_RALT)) {
-                tap_code(KC_8);
-            } else if (get_mods() & MOD_BIT(KC_LGUI)) {
-                unregister_code(KC_LGUI);
-                tap_code16(S(A(KC_8)));
-                register_code(KC_LGUI);
-            } else if (get_mods() & MOD_BIT(KC_RGUI)) {
-                unregister_code(KC_RGUI);
-                tap_code16(S(A(KC_8)));
-                register_code(KC_RGUI);
-            } else {
-                WITHOUT_MODS({
-                    tap_code16(S(KC_8));
-                });
-            }
-
-            return false;
-        case _RMOD_:
-            if (!record->event.pressed) {
-                return false;
-            }
-
-            if (get_mods() & MOD_BIT(KC_LALT)) {
-                tap_code(KC_9);
-            } else if (get_mods() & MOD_BIT(KC_RALT)) {
-                tap_code(KC_9);
-            } else if (get_mods() & MOD_BIT(KC_LGUI)) {
-                unregister_code(KC_LGUI);
-                tap_code16(S(A(KC_9)));
-                register_code(KC_LGUI);
-            } else if (get_mods() & MOD_BIT(KC_RGUI)) {
-                unregister_code(KC_RGUI);
-                tap_code16(S(A(KC_9)));
-                register_code(KC_RGUI);
-            } else {
-                WITHOUT_MODS({
-                     tap_code16(S(KC_9));
-                });
-            }
-
-            return false;
         case KC_3BT:
             if (record->event.pressed) {
-                // ```
-                register_code(KC_RSFT);
-                register_code(KC_EQL);
-                register_code(KC_SPC);
-                unregister_code(KC_RSFT);
-                unregister_code(KC_EQL);
-                unregister_code(KC_SPC);
-
-                register_code(KC_RSFT);
-                register_code(KC_EQL);
-                register_code(KC_SPC);
-                unregister_code(KC_RSFT);
-                unregister_code(KC_EQL);
-                unregister_code(KC_SPC);
-
-                register_code(KC_RSFT);
-                register_code(KC_EQL);
-                register_code(KC_SPC);
-                unregister_code(KC_RSFT);
-                unregister_code(KC_EQL);
-                unregister_code(KC_SPC);
+                tap_code16(_BCKTIC);
+                tap_code(KC_SPC);
+                tap_code16(_BCKTIC);
+                tap_code(KC_SPC);
+                tap_code16(_BCKTIC);
+                tap_code(KC_SPC);
             }
             return false;
         case KC_BOX:
             if (record->event.pressed) {
-                register_code(KC_SLSH); // -
-                unregister_code(KC_SLSH);
-                register_code(KC_SPC); // space
-                unregister_code(KC_SPC);
-                register_code(KC_LALT);
-                register_code(KC_8); // [
-                unregister_code(KC_8);
-                register_code(KC_LALT);
-                register_code(KC_SPC); // space
-                unregister_code(KC_SPC);
-                register_code(KC_LALT);
-                register_code(KC_9); // ]
-                unregister_code(KC_9);
-                unregister_code(KC_LALT);
+                tap_code(_DASH__);
+                tap_code(KC_SPC);
+                tap_code16(_SQUARL);
+                tap_code(KC_SPC);
+                tap_code16(_SQUARR);
+                tap_code(KC_SPC);
             }
             return false;
         case KC_IPOL:
             if (record->event.pressed) {
-                tap_code16(__DOLL);
-                tap_code16(__LCBK);
+                tap_code16(_DOLLAR);
+                tap_code16(_CURLYL);
             }
             return false;
         case KC_FATAR:
             if (record->event.pressed) {
-                tap_code16(__EQ);
-                tap_code16(__RABK);
+                tap_code16(_EQUALS);
+                tap_code16(_ANGULR);
                 tap_code(KC_SPC);
             }
             return false;
