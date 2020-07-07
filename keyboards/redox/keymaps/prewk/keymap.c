@@ -53,10 +53,12 @@
 
 enum my_keycodes {
     _3BACKT = SAFE_RANGE, // ```
+    _1BACKT, // ` + space
     _CHKBOX, // - []
     _INTERP, // ${
     _FATARR, // =>
-    _3EQUAL // ===
+    _3EQUAL, // ===
+    _ENGAGE // engagement
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -69,7 +71,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_ESC  ,KC_A    ,KC_S    ,KC_D    ,KC_F    ,KC_G    ,KC_DEL  ,                          KC_BSPC ,KC_H    ,KC_J    ,KC_K    ,KC_L    ,_SV_OE_ ,_SV_AE_ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LSFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B    ,TG(_NAV),TG(_NUM),        TG(_NUM),TG(_NAV),KC_N    ,KC_M    ,KC_COMM ,KC_DOT  ,_DASH__ ,KC_RSFT ,
+     KC_LSFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B    ,_______ ,KC_CAPS ,        _TILDE_ ,_FSLASH ,KC_N    ,KC_M    ,KC_COMM ,KC_DOT  ,_DASH__ ,KC_RSFT ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
      KC_LCTRL, _ANGULL, _ANGULR,_OPTDOT ,    KC_LCMD      ,SPC_NAV, ENT_SYM ,        ENT_SYM , SPC_NAV,   KC_RCMD  ,     _OPTLFT ,KC_DOWN ,KC_UP   ,_CTRLRT
   //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
@@ -77,7 +79,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_SYMB] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     _BCKTIC ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5   ,                                            KC_F6   ,KC_F7   ,KC_F8   ,KC_F9   ,KC_F10  ,KC_F11  ,
+     _1BACKT ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5   ,                                            KC_F6   ,KC_F7   ,KC_F8   ,KC_F9   ,KC_F10  ,KC_F11  ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _3BACKT ,_PARENL ,_CURLYL ,_SQUARL ,_ANGULL ,_______ ,_______ ,                          _______ ,_3EQUAL ,_ANGULR ,_SQUARR ,_CURLYR ,_PARENR ,KC_F12  ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
@@ -107,7 +109,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
      _______ ,_______ ,_______ ,_______ ,KC_MPRV ,KC_MNXT ,                                            _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,KC_VOLU ,                          KC_MUTE ,_______ ,KC_P7   ,KC_P8   ,KC_P9   ,KC_PMNS ,_______ ,
+     _______ ,_______ ,_______ ,_ENGAGE ,_______ ,_______ ,KC_VOLU ,                          KC_MUTE ,_______ ,KC_P7   ,KC_P8   ,KC_P9   ,KC_PMNS ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,KC_VOLD ,                          KC_MPLY ,_______ ,KC_P4   ,KC_P5   ,KC_P6   ,KC_PPLS ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
@@ -171,12 +173,23 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+        case _ENGAGE:
+            if (record->event.pressed) {
+                SEND_STRING("engagement");
+            }
+            return false;
         case _3BACKT:
             if (record->event.pressed) {
                 tap_code16(_BCKTIC);
                 tap_code(KC_SPC);
                 tap_code16(_BCKTIC);
                 tap_code(KC_SPC);
+                tap_code16(_BCKTIC);
+                tap_code(KC_SPC);
+            }
+            return false;
+        case _1BACKT:
+            if (record->event.pressed) {
                 tap_code16(_BCKTIC);
                 tap_code(KC_SPC);
             }
