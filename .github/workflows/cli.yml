@@ -6,7 +6,7 @@ on:
     - dev
 
 jobs:
-  test:
+  compile:
     runs-on: ubuntu-latest
 
     container: qmkfm/base_container
@@ -19,3 +19,8 @@ jobs:
       run: pip3 install -r requirements.txt
     - name: Compile
       run: bin/qmk compile -kb redox -km prewk
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: build
+        path: .build/*.hex
