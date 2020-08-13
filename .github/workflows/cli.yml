@@ -3,14 +3,7 @@ name: CLI CI
 on:
   push:
     branches:
-    - master
-    - future
-  pull_request:
-    paths:
-    - 'lib/python/**'
-    - 'bin/qmk'
-    - 'requirements.txt'
-    - '.github/workflows/cli.yml'
+    - dev
 
 jobs:
   test:
@@ -24,5 +17,5 @@ jobs:
         submodules: recursive
     - name: Install dependencies
       run: pip3 install -r requirements.txt
-    - name: Run tests
-      run: bin/qmk pytest
+    - name: Compile
+      run: bin/qmk compile -kb redox -km prewk
