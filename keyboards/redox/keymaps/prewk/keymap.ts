@@ -69,7 +69,7 @@ const qwerty = {
         '⌫': 'KC_BSPC',
         'L⬆': 'KC_LSFT',
         '🧭': toggleLayer(Layer.Navigation),
-        '🔢': toggleLayer(Layer.Numpad),
+        '🆙': 'KC_CAPS',
         '⬆R': 'KC_RSFT',
         '^' :'KC_LCTRL',
         '<' :swedish["<"],
@@ -83,12 +83,13 @@ const qwerty = {
         '⬇️️': 'KC_DOWN',
         '⬆️': 'KC_UP',
         '➡️': 'RCTL_T(KC_RIGHT)',
+        '?️': 'KC_TRNS',
     },
     map: `
         ' 1 2 3 4 5              6 7 8 9 0 +
         ⇥ q w e r t 📝         📝 y u i o p å
        ␛ a s d f g ⌦          ⌫  h j k l ö ä
-      L⬆ z x c v b 🧭 🔢    🔢 🧭 n m , . - ⬆R
+      L⬆ z x c v b  ? 🆙    ~ / n m , . - ⬆R
        ＾ < > ⌥  L⌘  _ ↩     ↩ _ ⌘R ⬅️ ⬇️ ⬆️ ➡️`
 }
 
