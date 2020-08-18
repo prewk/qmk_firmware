@@ -1,19 +1,12 @@
-name: CLI CI
+name: Build
 
 on:
   push:
     branches:
-    - master
-    - future
-  pull_request:
-    paths:
-    - 'lib/python/**'
-    - 'bin/qmk'
-    - 'requirements.txt'
-    - '.github/workflows/cli.yml'
+    - dev
 
 jobs:
-  test:
+  compile:
     runs-on: ubuntu-latest
 
     container: qmkfm/base_container
@@ -24,5 +17,10 @@ jobs:
         submodules: recursive
     - name: Install dependencies
       run: pip3 install -r requirements.txt
-    - name: Run tests
-      run: bin/qmk pytest
+    - name: Compile
+      run: bin/qmk compile -kb ergodash/rev1 -km mozheshitouguohe
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: build
+        path: .build/*.hex
