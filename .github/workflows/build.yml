@@ -1,4 +1,4 @@
-name: CLI CI
+name: Build
 
 on:
   push:
@@ -18,7 +18,7 @@ jobs:
     - name: Install dependencies
       run: pip3 install -r requirements.txt
     - name: Compile
-      run: bin/qmk compile -kb redox -km prewk
+      run: bin/qmk compile -kb lily58/rev1 -km default
 
     - uses: actions/upload-artifact@v2
       with:
