@@ -10,11 +10,60 @@
 
 extern uint8_t is_master;
 
-enum layer_number {
-  _QWERTY = 0,
-  _LOWER,
-  _RAISE,
-  _ADJUST,
+#define _QWERTY 0
+#define _SYMB 1
+#define _NAV 2
+#define _NUM 3
+
+#define _SNGLQU KC_NUHS // '
+#define _DOBLQU S(KC_2) // "
+#define _BCKTIC S(KC_EQL) // `
+#define _APOSTR KC_EQL // ´
+#define _MULTIP S(KC_NUHS) // *
+#define _2_DOTS KC_RBRC // ¨
+#define _SV_AU_ KC_LBRC // Å
+#define _SV_AE_ KC_QUOT // Ä
+#define _SV_OE_ KC_SCLN // Ö
+#define _ANGULL KC_GRV  // <
+#define _ANGULR S(KC_GRV) // >
+#define _SQUARL A(KC_8) // [
+#define _SQUARR A(KC_9) // ]
+#define _PARENL S(KC_8) // (
+#define _PARENR S(KC_9) // )
+#define _CURLYL S(A(KC_8)) // {
+#define _CURLYR S(A(KC_9)) // }
+#define _PLUS__ KC_MINS // +
+#define _DASH__ KC_SLSH // -
+#define _ATSIGN   A(KC_2) // @
+#define _DOLLAR A(KC_4) // $
+#define _FSLASH S(KC_7) // /
+#define _PIPE__ A(KC_7) // |
+#define _BSLASH S(A(KC_7)) // Backslash
+#define _WORD_L A(KC_LEFT) // <<
+#define _WORD_R A(KC_RIGHT) // >>
+#define _TILDE_ A(KC_RBRC) // ~
+#define _EQUALS S(KC_0) // =
+#define _QUESTI S(KC_MINS) // ?
+#define _COLON_ S(KC_DOT) // :
+#define _PARAGR KC_NUBS // §
+
+#define _OPTLFT RALT_T(KC_LEFT) // Opt / Left Arrow
+#define _OPTDOT LALT_T(KC_DOT) // Opt / .
+#define _CTRLRT RCTL_T(KC_RIGHT) // Ctrl / Right Arrow
+#define SPC_NAV LT(_NAV, KC_SPC) // Space // NAV layer
+#define ENT_SYM LT(_SYMB, KC_ENT) // Enter / SYM layer
+#define TAB_NUM LT(_NUM, KC_TAB) // Tab / NUM layer
+#define _QUAKE LCMD(KC_NUBS) // Quake terminal
+#define _DELLIN LCMD(KC_BSPC) // Delete line
+
+#define _CMD__Z G(KC_Z) // CMD + Z
+#define _CMD__X G(KC_X) // CMD + X
+#define _CMD__C G(KC_C) // CMD + C
+#define _CMD__V G(KC_V) // CMD + V
+
+enum my_keycodes {
+    _3BACKT = SAFE_RANGE, // ```
+    _1BACKT, // ` + space
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -39,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS, \
   KC_LCTRL, KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
   KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_LBRC,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT, \
-                        KC_LALT, KC_LGUI, MO(_LOWER), KC_SPC, KC_ENT, MO(_RAISE), KC_BSPC, KC_RGUI \
+                        KC_LALT, KC_LGUI, MO(_SYMB), KC_SPC, KC_ENT, MO(_NAV), KC_BSPC, KC_RGUI \
 ),
 /* LOWER
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -55,7 +104,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                   |      |      |      |/       /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
-[_LOWER] = LAYOUT( \
+[_SYMB] = LAYOUT( \
   _______, _______, _______, _______, _______, _______,                   _______, _______, _______,_______, _______, _______,\
   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, \
   KC_GRV, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_TILD, \
@@ -77,7 +126,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                   `----------------------------'           '------''--------------------'
  */
 
-[_RAISE] = LAYOUT( \
+[_NAV] = LAYOUT( \
   _______, _______, _______, _______, _______, _______,                     _______, _______, _______, _______, _______, _______, \
   KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                        KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______, \
   KC_F1,  KC_F2,    KC_F3,   KC_F4,   KC_F5,   KC_F6,                       XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX, \
@@ -98,7 +147,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                   |      |      |      |/       /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
-  [_ADJUST] = LAYOUT( \
+  [_NUM] = LAYOUT( \
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
