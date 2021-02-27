@@ -100,7 +100,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|   {   |    |    }  |------+------+------+------+------+------|
  * |      |   <  |   >  |      |      |      |-------|    |-------|      |      |      |      |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   |      |      |      | /       /       \      \  |      |      |      |
+ *                   |      |      |      | /       /       \      \  |  Del | Down |  Up  |
  *                   |      |      |      |/       /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
@@ -109,11 +109,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, \
   _______, _ATSIGN, _DOLLAR, _MULTIP, _TILDE_, _COLON_,                   _EQUALS, _FSLASH, _PIPE__, _BSLASH, _QUESTI, _2_DOTS, \
   _______, _ANGULL, _ANGULR, _______, _______, _______, _CURLYL, _CURLYR, _______, _______, _______, _______, _______, _______, \
-                             _______, _______, _______, _______, _______, _______, _______, _______\
+                             _______, _______, _______, _______, _______, KC_DEL,  KC_DOWN, KC_UP\
 ),
 /* NAV
  * ,-----------------------------------------.                    ,-----------------------------------------.
- * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
+ * | Term |      |      |      |      |      |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |      |      |      |      |      |                    |      |WrdLft|PgDown| PgUp |WrdRgt|      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
@@ -127,7 +127,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_NAV] = LAYOUT( \
-  _______, _______, _______, _______, _______, _______,                     _______, _______, _______, _______, _______, _______, \
+  _QUAKE,  _______, _______, _______, _______, _______,                     _______, _______, _______, _______, _______, _______, \
   _______, _______, _______, _______, _______, _______,                     _______, _WORD_L, KC_PGUP, KC_PGDN, _WORD_R, _______, \
   _______, _______, _______, _______, _______, _______,                     _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, \
   _______, _______, _______, _______, _______, _______,  _SQUARL, _SQUARR,  _______, _______, _______, _______, _______, _______, \
@@ -188,13 +188,28 @@ const char *read_keylogs(void);
 
 void oled_task_user(void) {
   if (is_keyboard_master()) {
-    // If you want to change the display of OLED, you need to change here
-    oled_write_ln(read_layer_state(), false);
-    oled_write_ln(read_keylog(), false);
-    oled_write_ln(read_keylogs(), false);
-    //oled_write_ln(read_mode_icon(keymap_config.swap_lalt_lgui), false);
-    //oled_write_ln(read_host_led_state(), false);
-    //oled_write_ln(read_timelog(), false);
+    switch (get_highest_layer(layer_state)) {
+        case _QWERTY:
+            oled_write_ln_P(PSTR("QWERTY\n"), false);
+            break;
+        case _SYMB:
+            oled_write_ln_P(PSTR("SYMB\n"), false);
+            break;
+        case _NAV:
+            oled_write_ln_P(PSTR("NAV\n"), false);
+            break;
+        case _NUM:
+            oled_write_ln_P(PSTR("NUM\n"), false);
+            break;
+        default:
+            oled_write_ln_P(PSTR("Undefined"), false);
+    }
+
+    // Host Keyboard LED Status
+    led_t led_state = host_keyboard_led_state();
+    oled_write_P(led_state.num_lock ? PSTR("NUM ") : PSTR("    "), false);
+    oled_write_P(led_state.caps_lock ? PSTR("CAP ") : PSTR("    "), false);
+    oled_write_P(led_state.scroll_lock ? PSTR("SCR ") : PSTR("    "), false);
   } else {
     oled_write(read_logo(), false);
   }
