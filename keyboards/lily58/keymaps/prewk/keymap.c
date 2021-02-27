@@ -208,5 +208,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif
     // set_timelog();
   }
+
+  switch (keycode) {
+    case _3BACKT:
+      if (record->event.pressed) {
+        tap_code16(_BCKTIC);
+        tap_code(KC_SPC);
+        tap_code16(_BCKTIC);
+        tap_code(KC_SPC);
+        tap_code16(_BCKTIC);
+        tap_code(KC_SPC);
+      }
+      return false;
+    case _1BACKT:
+      if (record->event.pressed) {
+        tap_code16(_BCKTIC);
+        tap_code(KC_SPC);
+      }
+      return false;
+  }
+
   return true;
 }
