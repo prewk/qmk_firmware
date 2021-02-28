@@ -227,6 +227,8 @@ const char *read_keylogs(void);
 // const char *read_timelog(void);
 
 void oled_task_user(void) {
+  oled_write(oled_qwerty_l(), false);
+  /*
   if (is_keyboard_master()) {
     switch (get_highest_layer(layer_state)) {
         case _QWERTY:
@@ -253,6 +255,7 @@ void oled_task_user(void) {
   } else {
     oled_write(oled_qwerty_l(), false);
   }
+  */
 }
 #endif // OLED_DRIVER_ENABLE
 
