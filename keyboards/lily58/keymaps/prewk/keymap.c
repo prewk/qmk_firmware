@@ -228,12 +228,9 @@ void iota_gfx_task_user(void) {
 #endif//SSD1306OLED
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  if (record->event.pressed) {
-#ifdef OLED_DRIVER_ENABLE
-    set_keylog(keycode, record);
-#endif
+  //if (record->event.pressed) {
     // set_timelog();
-  }
+  //}
 
   switch (keycode) {
     case _3BACKT:
