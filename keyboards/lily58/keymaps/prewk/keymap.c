@@ -174,31 +174,6 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   return rotation;
 }
 
-static void render_logo(void) {
-  static const char PROGMEM my_logo[] = {
-    0b11000000, 0b00000000, 0b00000000, 0b00000000, 0b00000010,
-    0b10000000, 0b00000000, 0b00000000, 0b00000000, 0b00000111,
-    0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000010,
-    0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000,
-    0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000,
-    0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000,
-    0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000,
-    0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000,
-
-    0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000,
-    0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000,
-    0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000,
-    0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000,
-    0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000,
-    0b00100000, 0b00000000, 0b00000000, 0b00000000, 0b00000111,
-    0b01000000, 0b00000000, 0b00000000, 0b00000000, 0b00000101,
-    0b10000000, 0b00000000, 0b00000000, 0b00000000, 0b00000111
-  };
-
-  oled_write_raw_P(my_logo, sizeof(my_logo));
-}
-
-
 // When you add source files to SRC in rules.mk, you can use functions.
 const char *read_layer_state(void);
 const char *read_logo(void);
@@ -236,7 +211,7 @@ void oled_task_user(void) {
     oled_write_P(led_state.caps_lock ? PSTR("CAP ") : PSTR("    "), false);
     oled_write_P(led_state.scroll_lock ? PSTR("SCR ") : PSTR("    "), false);
   } else {
-    render_logo();
+    matrix_write(matrix, read_logo());
   }
 }
 #endif // OLED_DRIVER_ENABLE
