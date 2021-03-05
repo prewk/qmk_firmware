@@ -55,6 +55,8 @@ extern uint8_t is_master;
 #define TAB_NUM LT(_NUM, KC_TAB) // Tab / NUM layer
 #define _QUAKE LCMD(KC_NUBS) // Quake terminal
 #define _DELLIN LCMD(KC_BSPC) // Delete line
+#define _LSHDN LSFT_T(KC_DOWN) // Left shift / Down
+#define _RSHUP RSFT_T(KC_UP) // Right shift / Up
 
 #define _CMD__Z G(KC_Z) // CMD + Z
 #define _CMD__X G(KC_X) // CMD + X
@@ -87,7 +89,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _SNGLQU,  KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _PLUS__, \
   TAB_NUM,  KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    _SV_AU_, \
   KC_ESC,   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    _SV_OE_, _SV_AE_, \
-  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, _PARENL,  _PARENR,  KC_N,    KC_M,    KC_COMM, KC_DOT,  _DASH__,  KC_RSFT, \
+  _LSHDN,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, _PARENL,  _PARENR,  KC_N,    KC_M,    KC_COMM, KC_DOT,  _DASH__,  _RSHUP, \
                           KC_LCTRL,KC_LALT,KC_LGUI, SPC_NAV,    ENT_SYM, KC_BSPC, KC_LEFT, KC_RIGHT \
 ),
 /* SYM
@@ -140,7 +142,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |      |      |                    |      |   7  |  8   |  9   |   -  |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------.    ,-------|      |   4  |  5   |  6   |   +  |      |
- * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
+ * |------+------+------+------+------+------|       |    |KC_MPLY|------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------|    |-------|      |   1  |  2   |  3   | Enter|      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *                   |      |      |      | /       /       \      \  |   0  |   ,  |      |
